@@ -9,6 +9,7 @@ import {
   Route,
 } from "react-router-dom";
 import ProfileSettings from './Pages/ProfileSettings';
+import UpdatePassword from './Pages/UpdatePassword';
 
 function App() {
   const [isAuth, setisAuth] = useState(false)
@@ -33,6 +34,7 @@ function App() {
      <Route path='/home' element= {<HomeLogIn currentUser = {currentUser} setcurrentUser={setcurrentUser}  />}/>
 
      <Route path='/profilesetting' element= {<ProfileSettings currentUser = {currentUser} setcurrentUser={setcurrentUser}  />}/>
+     <Route path='/updatepassword' element= {<UpdatePassword currentUser = {currentUser} setcurrentUser={setcurrentUser}  />}/>
      </>
 }
      </Routes>

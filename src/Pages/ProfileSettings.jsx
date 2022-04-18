@@ -1,6 +1,8 @@
-import React, {useState } from "react";
+import React, {useState,useEffect } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 function ProfileSettings({currentUser,setcurrentUser}){
 
@@ -11,28 +13,39 @@ function ProfileSettings({currentUser,setcurrentUser}){
     const [newlastname, setnewlastName] = useState(currentUser.lastname)
     const [confirmpass, setConfirmpass] = useState(currentUser.password)
     const [newphone, setnewPhone] = useState(currentUser.phone)
-    const [biography, setbiography] = useState(currentUser.biography)
-
-
+    const [biography, setbiography] = useState(currentUser.biography || "")
+    let navigate = useNavigate()
+  //  axios.defaults.withCredentials = true
 async function update  (email) {
   try{ 
     const response = await axios.put(`http://localhost:3001/update/${currentUser.email}`,
-     {lastname:newlastname, email, firstname:newfirstname, phone:newphone,loginemail, password:password ,confirmpass:confirmpass, biography:biography })
+     {lastname:newlastname, email, firstname:newfirstname,password, phone:newphone,loginemail ,confirmpass:confirmpass, biography:biography })
    
-    setcurrentUser(response.data)
+    setcurrentUser({...response.data})
+
     setloginemail(response.data.email)
     alert(response.data.message)
+    navigate("/home")
 
   }
-    catch(err){
-
-      alert(err.response.data.message)
-    }
-  
-  
+  catch(err){
+    if(err.response.data[0]){
+     alert(`${err.response.data[0].instancePath} ${err.response.data[0].message}` )
+      }else{
+       alert(err.response.data.message)
+         }
+       } 
 }
+/*
+useEffect(() => {
+  axios.get(`http://localhost:3001/update/${currentUser.email}`).then((response) => {
+     if(response.data.isAuth === true){
+       setcurrentUser({...response.data.currentUser[0]})
 
-
+         }
+      })
+      },[])
+*/
     return (
         <div>
        <h1>
@@ -40,30 +53,21 @@ async function update  (email) {
        </h1>
        <Form className="m-5">
          <Row >
-              <Form.Group className="mb-3" md="3" as={Col} controlId="formGridEmail">
+              <Form.Group className="mb-3" md="4" as={Col} controlId="formGridEmail">
                 <Form.Label className="mb-3">Email</Form.Label>
                 <Form.Control onChange={(e)=>setEmail(e.target.value)} defaultValue = {currentUser.email} type="email" placeholder="Enter email" required/>
               </Form.Group>
-            
-              <Form.Group as={Col}className="mb-3" md="3" controlId="formGridName">
-                <Form.Label className="mb-3">Password</Form.Label>
-                <Form.Control onChange={(e)=>setPassward(e.target.value)} defaultValue = {currentUser.password}  placeholder="Password" type="password" required/>
-              </Form.Group>
-              <Form.Group as={Col} className="mb-3" md="3" controlId="formGridName">
-                <Form.Label className="mb-3">Confirm Password</Form.Label>
-                <Form.Control onChange={(e)=>setConfirmpass(e.target.value)} defaultValue = {currentUser.password} type="password" placeholder="Password" required/>
-              </Form.Group>
               </Row>
               <Row>
-            <Form.Group as={Col} className="mb-3" md="3" controlId="formGridName" required>
+            <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName" required>
               <Form.Label className="mb-3">Name</Form.Label>
               <Form.Control onChange={(e)=>setnewName(e.target.value)} defaultValue = {currentUser.firstname} placeholder="Name" />
             </Form.Group>
-            <Form.Group as={Col} className="mb-3" md="3" controlId="formGridName">
+            <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
               <Form.Label className="mb-3">Last Name</Form.Label>
               <Form.Control onChange={(e)=>setnewlastName(e.target.value)} defaultValue = {currentUser.lastname} placeholder="Last Name" required/>
             </Form.Group>
-            <Form.Group as={Col} className="mb-3" md="3" controlId="formGridName">
+            <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
               <Form.Label className="mb-3">Phone Number</Form.Label>
               <Form.Control onChange={(e)=>setnewPhone(e.target.value)} defaultValue = {currentUser.phone} type="number" placeholder="Phone Number" required/>
             </Form.Group>
@@ -77,6 +81,7 @@ async function update  (email) {
               update(email)}} variant="secondary">
             Update Profile
           </Button>
+          <Button variant="secondary"><NavLink to="/updatepassword">Update Password</NavLink></Button>
         </div>
     )
 }

@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
   const [lastname, setlastName] = useState("")
   const [confirmpass, setConfirmpass] = useState("")
   const [phone, setPhone] = useState("")
-  const [error, seterror] = useState("")
+
   
   let navigate = useNavigate()
 
@@ -34,8 +34,18 @@ import { useNavigate } from 'react-router-dom';
     navigate('/home')
 
 }catch(err){
-   seterror(err.response.data.message)
-  }
+  if(err.response.data[0]){
+   alert(`${err.response.data[0].instancePath} ${err.response.data[0].message}` )
+    }else{
+     alert(err.response.data.message)
+       }
+       setEmail('')
+       setName('')
+       setlastName('')
+       setPassward('')
+       setConfirmpass('')
+       setPhone('')
+     }
 }
   return (
     <>
@@ -83,7 +93,7 @@ import { useNavigate } from 'react-router-dom';
           <Button variant="primary" onClick={()=>register()}>
             Sign Up
           </Button>
-          {error}
+
         </Modal.Footer>
       </Modal>
     </>

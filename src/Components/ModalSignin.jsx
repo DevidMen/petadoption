@@ -3,7 +3,7 @@ import { Row, Button, Col, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-function ModalSignin({setisAuth, isAuth, setcurrentUser}) {
+function ModalSignin({setisAuth, setcurrentUser}) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -12,25 +12,50 @@ function ModalSignin({setisAuth, isAuth, setcurrentUser}) {
   const [error, setError] = useState("")
 
   let navigate = useNavigate()
+  //axios.defaults.withCredentials = true
 
-
-  async function login(){
-   const response = await axios.post('http://localhost:3001/login', { email: email , password : password})
-    .then((response) =>{
-
-      if(response.data.message){
-        setError({...response.data})
-        setisAuth(false)
-      }else{
+   async function login(){
+    try{
+      const response = await axios.post('http://localhost:3001/login',
+      { email: email , password : password})
         setcurrentUser({...response.data[0]})
         setisAuth(true)
         navigate('/home')
-      }
-    })
-    setEmail('')
-    setPassward('')  
-  };
+        setEmail('')
+        setPassward('')  
 
+    }catch(err){
+      if(err.response.data[0]){
+       alert(`${err.response.data[0].instancePath} ${err.response.data[0].message}` )
+        }else{
+         alert(err.response.data.message)
+           }
+           setEmail('')
+           setPassward('')
+         }
+         };
+
+/*
+       useEffect(() => {
+     axios.get('http://localhost:3001/login').then((response) => {
+        if(response.data.isAuth === true){
+          setcurrentUser({...response.data.currentUser[0]})
+          console.log({...response.data.currentUser[0]})
+            setisAuth(true)
+            navigate('/home')
+            }
+         })
+         },[])
+      const userAuthenticated = () => {
+        axios.get('/isUserAuthorized',{
+          headers: {
+            "x-access-token": localStorage.getItem("token")
+          }
+        }).then((response) => {
+          console.log(response)
+        })
+      }
+      */
   return (
     <>
       <button onClick={handleShow}>
