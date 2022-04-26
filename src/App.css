@@ -1,7 +1,6 @@
-body{
-  background-color: #15202B;
-  color: red;
-  font-family: 'Roboto', sans-serif;
+body {
+  color: black;
+  font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -9,54 +8,62 @@ body{
   margin-top: 80px;
 }
 
-input{
+input {
   border: none;
   resize: none;
   outline: none;
   margin: 10px;
 }
-button{
+button {
   box-sizing: border-box;
   border-radius: 4px;
   font-size: 16px;
   resize: none;
   margin: 10px;
-  background-color: #007BFF;
+  background-color: #007bff;
   border: none;
   color: white;
   margin-top: 10px;
 }
-.divsignin , .divsignup {
-  margin:10% auto 0 auto;
-  padding:30px;
-  width:400px;
-  height:auto;
-  overflow:hidden;
-  border-radius:10px;
+.divsignin,
+.divsignup {
+  margin: 10% auto 0 auto;
+  padding: 30px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
   border: 1px solid;
   display: flex;
   flex-direction: column;
 }
-  li{
-    color: #6C757D;
-    padding: 10px;
-    list-style-type: none;
-    font-size: medium;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .navbar {
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
-  .navbar li {
-    float: left;
-    display: block;
-    color: #F2F2F2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+li {
+  color: #6c757d;
+  padding: 10px;
+  list-style-type: none;
+  font-size: medium;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.navbar li {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+a:hover {
+  color: white;
+}
