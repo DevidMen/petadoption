@@ -3,67 +3,112 @@ body {
   font-family: "Roboto", sans-serif;
   margin: 0;
   padding: 0;
+  background: url(./images/101229158-illustrazione-di-tracce-di-cane-sullo-sfondo-del-cuore.webp);
+  background-repeat: no-repeat;
 }
+
 .main {
-  margin-top: 80px;
+  margin-top: 150px;
 }
 
 input {
   border: none;
   resize: none;
   outline: none;
-  margin: 10px;
 }
-button {
-  box-sizing: border-box;
-  border-radius: 4px;
-  font-size: 16px;
-  resize: none;
-  margin: 10px;
-  background-color: #007bff;
-  border: none;
-  color: white;
-  margin-top: 10px;
+.modal {
+  margin-top: 50px !important;
+  margin-bottom: 40px !important;
 }
-.divsignin,
-.divsignup {
-  margin: 10% auto 0 auto;
-  padding: 30px;
-  width: 400px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 10px;
-  border: 1px solid;
-  display: flex;
-  flex-direction: column;
-}
-li {
-  color: #6c757d;
-  padding: 10px;
-  list-style-type: none;
-  font-size: medium;
-  text-decoration: none;
-  font-weight: bold;
+.modal-footer {
+  margin-bottom: 40px !important;
 }
 .navbar {
   overflow: hidden;
-  background-color: #333;
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 9999;
+  justify-content: flex-start !important;
+  background-color: #e6eaeb !important;
 }
-.navbar li {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
+
 a {
   text-decoration: none;
   color: white;
 }
-a:hover {
-  color: white;
+
+.petscontainer {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.container {
+  margin-top: 150px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 2%;
+}
+.containertwo {
+  margin-top: 150px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 10%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.5);
+}
+
+img {
+  height: 300px;
+  margin-bottom: 10px;
+}
+
+.card h4,
+.card .descp {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.social {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 3px;
+}
+
+.descp {
+  text-align: justify;
+  text-justify: inner-word;
+}
+
+.prova {
+  background-image: url(./images/funny-puppy-dog-border-collie-wearing-christmas-costume-red-santa-claus-hat-holding-christmas-orname_80942-7504.webp);
+}
+.h1 {
+  padding: 15px;
 }

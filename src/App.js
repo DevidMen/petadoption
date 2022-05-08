@@ -1,34 +1,29 @@
-import "./App.css";
 import Home from "./Pages/Home";
-import Navbar from "./Components/Navbar";
+import Search from './Pages/Search'
+import NavbarGeneral from "./Components/Navbar";
 import React from "react";
 import HomeLogIn from "./Pages/HomeLogIn";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProfileSettings from "./Pages/ProfileSettings";
 import UpdatePassword from "./Pages/UpdatePassword";
-import { nanoid } from "nanoid";
-import axios from "axios";
 import Users from "./Pages/Users";
+import AddPets from "./Pages/AddPets";
+import GetPets from "./Pages/GetPets";
+import UpdatePet from "./Pages/UpdatePet";
+import Showpet from './Pages/Showpet'
+import MyPetsPage from "./Pages/MyPetsPage";
+import UserDetails from './Pages/UserDetails'
+import "./App.css";
 
-function App() {
+function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
   const [isAuth, setisAuth] = useState(false);
   const [currentUser, setcurrentUser] = useState("");
-  const [user, setUser] = useState("");
+  const [admin, setisAdmin] = useState(false);
+  const [editPet, setEditPet] = useState('')
+  const [userComplete, setUserComplete] = useState([]);
+  const [pet, setPet] = useState('')
 
-  /*
-  useEffect(()=>{
-    async function showUsers(){
-      try{
-    const response = await axios.get(`http://localhost:3001/users`)
-    setUser([...response.data.result])
-  }catch(e){
-    console.log(e)
-     }
-  }showUsers()
-  },[])
-
-*/
   useEffect(() => {
     if (!isAuth && window.location.pathname !== "/") {
       window.location.pathname = "/";
@@ -36,18 +31,20 @@ function App() {
   }, [isAuth]);
 
   return (
-    <div className="main">
-      {isAuth ? (
-        <Navbar
+    <div>
+      
+        <NavbarGeneral
           setisAuth={setisAuth}
           isAuth={isAuth}
           setcurrentUser={setcurrentUser}
+          currentUser={currentUser}
+          admin={admin}
         />
-      ) : (
-        ""
-      )}
+
       <Routes>
+
         {!isAuth ? (
+          <>
           <Route
             path="/"
             element={
@@ -55,17 +52,33 @@ function App() {
                 setisAuth={setisAuth}
                 isAuth={isAuth}
                 setcurrentUser={setcurrentUser}
+                admin={admin}
+                setisAdmin={setisAdmin}
               />
             }
           />
-        ) : (
+
+        </>  
+        ) 
+        
+        : (
           <>
+                    
             <Route
               path="/home"
               element={
                 <HomeLogIn
                   currentUser={currentUser}
                   setcurrentUser={setcurrentUser}
+                />
+              }
+            />
+            <Route
+              path="/mypets"
+              element={
+                <MyPetsPage
+                  currentUser={currentUser}
+                  isAuth = {isAuth}
                 />
               }
             />
@@ -87,12 +100,52 @@ function App() {
                 />
               }
             />
+             
+
+            {admin ? (
+              <>
+                <Route
+                  path="/users"
+                  element={<Users currentUser={currentUser} userComplete={userComplete} setUserComplete={setUserComplete} pet={pet} setPet={setPet} />}
+                />
+                <Route
+                  path="/userdetails"
+                  element={<UserDetails currentUser={currentUser} userComplete={userComplete} setUserComplete={setUserComplete} pet={pet} setPet={setPet} />}
+                />
+                <Route
+                  path="/addpet"
+                  element={<AddPets currentUser={currentUser} />}
+                />
+                <Route path="/getpets" element={<GetPets currentUser={currentUser} pet={pet} setEditPet={setEditPet} setPet={setPet} />} />
+                <Route
+                  path="/updatepet"
+                  element={<UpdatePet currentUser={currentUser} editPet={editPet}  />}
+                />
+              </>
+            ) : (
+              ""
+            )}
           </>
         )}
+          <Route
+          path="/search"
+          element={
+            <Search
+              setisAuth={setisAuth}
+              isAuth={isAuth}
+              currentUser={currentUser}
+              admin={admin}
+              setisAdmin={setisAdmin}
+              saveIt = {saveIt}
+              adoptIt = {adoptIt}
+              fosteredIt = {fosteredIt}
+              returnAgency = {returnAgency}
+              pet={pet} setPet={setPet}
+            />
+          }
+        />
       </Routes>
     </div>
   );
 }
 export default App;
-
-//{user?<Route path='/users' element= {user.map(item=><Users key = {nanoid()} item={item} user = {user} setUser={setUser}  />)}/>:""}

@@ -4,12 +4,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-function ModalSignin({ setisAuth, setcurrentUser }) {
+function ModalSignin({ setisAuth, setcurrentUser, setisAdmin }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [email, setEmail] = useState("");
   const [password, setPassward] = useState("");
+
   const cookies = new Cookies();
   const token = cookies.get("access-token");
 
@@ -27,6 +28,7 @@ function ModalSignin({ setisAuth, setcurrentUser }) {
       navigate("/home");
       setEmail("");
       setPassward("");
+      setisAdmin(response.data.user[0].role === "admin");
     } catch (err) {
       if (err.response.data[0]) {
         alert(
@@ -41,13 +43,14 @@ function ModalSignin({ setisAuth, setcurrentUser }) {
   }
 
   useEffect(() => {
-    console.log(token);
+
     if (token) {
       axios.get(`http://localhost:3001/login/${token}`).then((res) => {
         if (res) {
           setcurrentUser({ ...res.data.user[0] });
           setisAuth({ ...res.data.auth });
           navigate("/home");
+          setisAdmin(res.data.user[0].role === "admin");
         }
       });
     }
@@ -55,7 +58,10 @@ function ModalSignin({ setisAuth, setcurrentUser }) {
 
   return (
     <>
-      <button onClick={handleShow}>Login</button>
+
+      <Button  variant="primary" size="sm" onClick={handleShow}>
+      Login
+    </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>

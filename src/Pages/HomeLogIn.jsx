@@ -1,9 +1,10 @@
 function HomeLogIn({ currentUser }) {
   return (
-    <div>
-      <p>
+    <div className="containertwo">
+      <h1>Start adopting now and find your new best friend</h1>
+      <h4>
         Welcome {currentUser.firstname} {currentUser.lastname}
-      </p>
+      </h4>
     </div>
   );
 }

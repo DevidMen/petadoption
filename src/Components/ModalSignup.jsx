@@ -3,7 +3,7 @@ import { Row, Button, Col, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function ModalSignup({ setisAuth, setcurrentUser, currentUser }) {
+function ModalSignup({ setisAuth, setcurrentUser }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,7 +55,10 @@ function ModalSignup({ setisAuth, setcurrentUser, currentUser }) {
 
   return (
     <>
-      <button onClick={handleShow}>Sign Up</button>
+
+      <Button className='m-5' variant="primary" size="sm" onClick={handleShow}>
+      Sign Up
+    </Button>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>Sign Up</Modal.Title>

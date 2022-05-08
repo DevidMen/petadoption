@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 function UpdatePassword({ currentUser }) {
   const [password, setPassward] = useState("");
-  const [email] = useState(currentUser.email);
+  const [email, setEmail] = useState(currentUser.email);
   const [confirmpass, setConfirmpass] = useState("");
 
   let navigate = useNavigate();
@@ -31,7 +31,7 @@ function UpdatePassword({ currentUser }) {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Update Password</h1>
       <Form className="m-5">
         <Form.Group className="mb-3" md="4" as={Col} controlId="formGridEmail">
@@ -57,7 +57,7 @@ function UpdatePassword({ currentUser }) {
         onClick={() => {
           update(email);
         }}
-        variant="secondary"
+        variant="success"
       >
         Update Password
       </Button>

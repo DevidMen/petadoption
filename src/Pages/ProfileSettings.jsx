@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -48,62 +48,55 @@ function ProfileSettings({ currentUser, setcurrentUser }) {
   }
 
   return (
-    <div>
-      <h1>Profile Settings</h1>
+
+      <div className="prova">
+      <h1 className="h1">Profile Settings</h1>
       <Form className="m-5">
-        <Row>
-          <Form.Group
-            className="mb-3"
-            md="4"
-            as={Col}
-            controlId="formGridEmail"
-          >
-            <Form.Label className="mb-3">Email</Form.Label>
-            <Form.Control
-              onChange={(e) => setEmail(e.target.value)}
-              defaultValue={currentUser.email}
-              type="email"
-              placeholder="Enter email"
-              required
-            />
-          </Form.Group>
-        </Row>
-        <Row>
-          <Form.Group
-            as={Col}
-            className="mb-3"
-            md="4"
-            controlId="formGridName"
+        <Form.Group className="mb-3" md="4" as={Col} controlId="formGridEmail">
+          <Form.Label className="mb-3">Email</Form.Label>
+          <Form.Control
+            onChange={(e) => setEmail(e.target.value)}
+            defaultValue={currentUser.email}
+            type="email"
+            placeholder="Enter email"
             required
-          >
-            <Form.Label className="mb-3">Name</Form.Label>
-            <Form.Control
-              onChange={(e) => setnewName(e.target.value)}
-              defaultValue={currentUser.firstname}
-              placeholder="Name"
-            />
-          </Form.Group>
-          <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
-            <Form.Label className="mb-3">Last Name</Form.Label>
-            <Form.Control
-              onChange={(e) => setnewlastName(e.target.value)}
-              defaultValue={currentUser.lastname}
-              placeholder="Last Name"
-              required
-            />
-          </Form.Group>
-          <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
-            <Form.Label className="mb-3">Phone Number</Form.Label>
-            <Form.Control
-              onChange={(e) => setnewPhone(e.target.value)}
-              defaultValue={currentUser.phone}
-              type="number"
-              placeholder="Phone Number"
-              required
-            />
-          </Form.Group>
-        </Row>
-        <Form.Group as={Col} className="mb-3" md="12" controlId="formGridName">
+          />
+        </Form.Group>
+
+        <Form.Group
+          as={Col}
+          className="mb-3"
+          md="4"
+          controlId="formGridName"
+          required
+        >
+          <Form.Label className="mb-3">Name</Form.Label>
+          <Form.Control
+            onChange={(e) => setnewName(e.target.value)}
+            defaultValue={currentUser.firstname}
+            placeholder="Name"
+          />
+        </Form.Group>
+        <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
+          <Form.Label className="mb-3">Last Name</Form.Label>
+          <Form.Control
+            onChange={(e) => setnewlastName(e.target.value)}
+            defaultValue={currentUser.lastname}
+            placeholder="Last Name"
+            required
+          />
+        </Form.Group>
+        <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
+          <Form.Label className="mb-3">Phone Number</Form.Label>
+          <Form.Control
+            onChange={(e) => setnewPhone(e.target.value)}
+            defaultValue={currentUser.phone}
+            type="number"
+            placeholder="Phone Number"
+            required
+          />
+        </Form.Group>
+        <Form.Group as={Col} className="mb-3" md="4" controlId="formGridName">
           <Form.Label>Biography</Form.Label>
           <Form.Control
             className="pb-5"
@@ -115,17 +108,20 @@ function ProfileSettings({ currentUser, setcurrentUser }) {
         </Form.Group>
       </Form>
       <Button
+      className="m-3"
         onClick={() => {
           update(email);
         }}
-        variant="secondary"
+        variant="success"
       >
         Update Profile
       </Button>
-      <Button variant="secondary">
+      <Button className="m-3" variant="primary">
         <NavLink to="/updatepassword">Update Password</NavLink>
       </Button>
-    </div>
+      
+      </div>
+
   );
 }
 
