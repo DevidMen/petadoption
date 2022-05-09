@@ -1,15 +1,13 @@
 import React from "react";
-import { Card, ListGroupItem, ListGroup, Button, Alert } from "react-bootstrap";
+import {Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ModalShowpet from "../Components/ModalShowpet";
+
 function GetPets({ currentUser, setEditPet, setPet }) {
   const [allPets, setAllPets] = useState([]);
   const [email, setEmail] = useState(currentUser.email);
-  const [modalShow, setModalShow] = useState(false);
-  const [modalopen, setmodalopen] = useState(false);
-  const [status, setStatus] = useState([]);
+
   let navigate = useNavigate();
 
   function updatePet(pet) {
@@ -18,6 +16,7 @@ function GetPets({ currentUser, setEditPet, setPet }) {
   }
   function showMore(pet) {
     setPet(pet);
+    navigate("/showpet");
   }
 
   useEffect(() => {
@@ -42,14 +41,14 @@ function GetPets({ currentUser, setEditPet, setPet }) {
         }
       );
       alert(response.data.message);
-      console.log({ ...response });
       setAllPets([...response.data.result]);
     } catch (e) {
-      console.log(e);
+      alert(e.response.data.message);
     }
   }
   return (
     <div className="container">
+      <div  className="petscontainer">
       {!allPets.length ? (
         <Alert className="m-5" variant="success">
           <Alert.Heading>No pets to show</Alert.Heading>
@@ -59,9 +58,8 @@ function GetPets({ currentUser, setEditPet, setPet }) {
           {allPets &&
             allPets.map((pet, index) => {
               return (
-                <div className="petscontainer">
-                  <div>
-                    <div className="main-cont">
+                
+                    <div key={index} className="main-cont">
                       <div className="card">
                         <img src={pet.image} />
                         <div className="descp">
@@ -82,12 +80,12 @@ function GetPets({ currentUser, setEditPet, setPet }) {
                           </h4>
                         </div>
                         <div class="social">
-                          <ModalShowpet
-                            onClick={() => showMore(pet)}
-                            show={modalShow}
-                            onHide={() => setModalShow(false)}
+                          <Button
+                          onClick={()=>showMore(pet)}
+                          variant="primary"
+                          size="sm"
                             pet={pet}
-                          />
+                          >Show More</Button>
                           <Button
                             variant="success"
                             size="sm"
@@ -105,12 +103,12 @@ function GetPets({ currentUser, setEditPet, setPet }) {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+            
               );
             })}
         </>
       )}
+      </div>
     </div>
   );
 }

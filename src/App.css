@@ -17,12 +17,9 @@ input {
   outline: none;
 }
 .modal {
-  margin-top: 50px !important;
-  margin-bottom: 40px !important;
+  margin-top: 40px !important;
 }
-.modal-footer {
-  margin-bottom: 40px !important;
-}
+
 .navbar {
   overflow: hidden;
   position: fixed;
@@ -45,7 +42,7 @@ a {
 }
 
 .container {
-  margin-top: 150px;
+  margin-top: 80px;
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(14px);

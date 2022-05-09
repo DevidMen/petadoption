@@ -2,20 +2,17 @@ import { useState, useEffect } from "react";
 import {
   Form,
   Button,
-  Card,
-  ListGroupItem,
-  ListGroup,
   Col,
   Row,
 } from "react-bootstrap";
 import axios from "axios";
-import { nanoid } from "nanoid";
-import ModalShowpet from "../Components/ModalShowpet";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import ButtonsForStatus from "../Components/ButtonsForStatus";
+
 
 function Search({ isAuth, currentUser, setPet }) {
-  const [modalShow, setModalShow] = useState(false);
-  const [modalopen, setmodalopen] = useState(false);
+
   const [searchType, setSearchType] = useState("");
   const [searchName, setSearchName] = useState("");
   const [searchHeigth, setSearchHeigth] = useState("");
@@ -30,17 +27,9 @@ function Search({ isAuth, currentUser, setPet }) {
 
   function showMore(pet) {
     setPet(pet);
+    navigate("/showpet");
+
   }
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3001/pets/user/${currentUser.email}`)
-      .then((res) => {
-        setSavedPets([...res.data.savedPetResult]);
-      })
-      .catch((e) => {
-        console.log(e.response.data.message);
-      });
-  }, [status]);
 
   const handleSearch = () => {
     axios
@@ -60,64 +49,7 @@ function Search({ isAuth, currentUser, setPet }) {
       });
   };
 
-  async function adoptIt(pet) {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/pet/${pet.petsId}/adopt`,
-        email
-      );
-      setAllPets([...response.data]);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  async function returnAgency(pet) {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/pet/${pet.petsId}/return`,
-        email
-      );
-      setAllPets([...response.data]);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async function fosteredIt(pet) {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/pet/${pet.petsId}/fostered`,
-        email
-      );
-      setAllPets([...response.data]);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  async function saveIt(pet) {
-    try {
-      const response = await axios.post(
-        `http://localhost:3001/pet/${pet.petsId}/save`,
-        email
-      );
-      setStatus(response);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  async function unSaveIt(pet) {
-    try {
-      const response = await axios.delete(
-        `http://localhost:3001/pet/${pet.petsId}/save`,
-        {
-          data: { email },
-        }
-      );
-      setStatus(response);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+ 
   return (
     <div className="container">
       <Form className="mb-5">
@@ -207,7 +139,7 @@ function Search({ isAuth, currentUser, setPet }) {
         {allPets &&
           allPets.map((pet, index) => {
             return (
-              <div>
+              <div key={index}>
                 <div class="main-cont">
                   <div class="card">
                     <img src={pet.image} />
@@ -229,94 +161,14 @@ function Search({ isAuth, currentUser, setPet }) {
                       </h4>
                     </div>
                     <div class="social">
-                      <ModalShowpet
+                      <Button
                         onClick={() => showMore(pet)}
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
+                        variant="primary"
+                        size="sm"
                         pet={pet}
-                      />
-                      {isAuth ? (
-                        <>
-                          {savedPets.find((val) => val.petsId == pet.petsId) !=
-                          null ? (
-                            <Button
-                              variant="danger"
-                              size="sm"
-                              onClick={() => unSaveIt(pet)}
-                            >
-                              Unsave
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="success"
-                              size="sm"
-                              onClick={() => saveIt(pet)}
-                            >
-                              Save
-                            </Button>
-                          )}
-
-                          {pet.adoptionStatus === "Avaiable" ? (
-                            <>
-                              <Button
-                                variant="success"
-                                size="sm"
-                                onClick={() => fosteredIt(pet)}
-                              >
-                                Foster
-                              </Button>
-                              <Button
-                                variant="success"
-                                size="sm"
-                                onClick={() => adoptIt(pet)}
-                              >
-                                Adopt
-                              </Button>
-                            </>
-                          ) : (
-                            ""
-                          )}
-
-                          {pet.adoptionStatus === "Adopted" &&
-                          currentUser.email === pet.owner ? (
-                            <>
-                              <Button
-                                variant="danger"
-                                size="sm"
-                                onClick={() => returnAgency(pet)}
-                              >
-                                Cancell Adoption
-                              </Button>
-                            </>
-                          ) : (
-                            ""
-                          )}
-
-                          {pet.adoptionStatus === "Fostered" &&
-                          currentUser.email === pet.owner ? (
-                            <>
-                              <Button
-                                variant="danger"
-                                size="sm"
-                                onClick={() => returnAgency(pet)}
-                              >
-                                Cancell foster
-                              </Button>
-                              <Button
-                                variant="success"
-                                size="sm"
-                                onClick={() => adoptIt(pet)}
-                              >
-                                Adopt
-                              </Button>
-                            </>
-                          ) : (
-                            ""
-                          )}
-                        </>
-                      ) : (
-                        ""
-                      )}
+                        isAuth={isAuth}
+                        currentUser={currentUser}
+                      >Show More</Button>
                     </div>
                   </div>
                 </div>

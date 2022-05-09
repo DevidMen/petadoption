@@ -31,7 +31,6 @@ function Users({ currentUser , index ,setUserComplete}) {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
             <th>Email</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -44,7 +43,7 @@ function Users({ currentUser , index ,setUserComplete}) {
             users.map((user, index) => {
               return (
                 <tr key={index} onClick={()=>userFull(user)}>
-                  <td>{index}</td>
+   
                   <td>{user.email}</td>
                   <td>{user.firstname}</td>
                   <td>{user.lastname}</td>

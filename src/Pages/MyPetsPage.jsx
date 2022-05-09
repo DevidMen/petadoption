@@ -4,7 +4,7 @@ import MyPetsCards from "../Components/MyPetsCards";
 import axios from "axios";
 
 
-function MyPetsPage({ isAuth, currentUser }) {
+function MyPetsPage({ isAuth, currentUser, setPet ,pet}) {
   const [savedPets, setSavedPets] = useState([]);
   const [status , setStatus] = useState([])
   const [ownerPets, setOwnerPets] = useState([]);
@@ -34,7 +34,8 @@ function MyPetsPage({ isAuth, currentUser }) {
             <div className="petscontainer">
               {savedPets.map((pet, index) => (
                 <MyPetsCards
-                  pet={pet}
+                setPet={setPet}
+                pet={pet}
                   index={index}
                   isAuth={isAuth}
                   key={index}
@@ -63,7 +64,8 @@ function MyPetsPage({ isAuth, currentUser }) {
                 <div className="petscontainer">
                   {ownerPets.map((pet, index) => (
                     <MyPetsCards
-                      pet={pet}
+                    setPet={setPet}
+                    pet={pet}
                       index={index}
                       key={index}
                       currentUser={currentUser}
@@ -83,7 +85,8 @@ function MyPetsPage({ isAuth, currentUser }) {
                 <div className="petscontainer">
                   {fosteredPets.map((pet, index) => (
                     <MyPetsCards
-                      pet={pet}
+                    setPet={setPet}
+                    pet={pet}
                       index={index}
                       key={index}
                       isAuth={isAuth}

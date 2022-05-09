@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, ListGroupItem, ListGroup } from "react-bootstrap";
 import axios from "axios";
 import { useEffect } from "react";
-function GetPets({ setPet, pet }) {
+import ButtonsForStatus from "../Components/ButtonsForStatus";
+function Showpet({ pet, currentUser, setSavedPets, isAuth }) {
+  const [email, setEmail] = useState(currentUser.email);
+  const [currentPet, setCurrentPet] = useState(pet);
+  const [status, setStatus] = useState("");
   useEffect(() => {
     async function showPets() {
       try {
@@ -10,59 +14,85 @@ function GetPets({ setPet, pet }) {
           `http://localhost:3001/showpet/${pet.petsId}`
         );
 
-        setPet({ ...response.data.result[0] });
+        setCurrentPet({ ...response.data.result[0] });
       } catch (e) {
-        alert(e.response.data.message);
+        console.log(e.response.data.message);
       }
     }
     showPets();
-  }, []);
+  }, [status]);
+  useEffect(() => {
+    if(isAuth){
+    axios
+      .get(`http://localhost:3001/pets/user/${currentUser.email}`)
+      .then((res) => {
+        setSavedPets([...res.data.savedPetResult]);
+      })
+      .catch((e) => {
+        console.log(e.response);
+      });
+    }
+  }, [status]);
 
   return (
     <div className="container">
       <div className="petscontainer">
-        <ListGroup horizontal>
-          <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={pet.image} className="image" />
-            <Card.Body>
-              <Card.Title><strong>Name:</strong> {pet.namePets}</Card.Title>
-              <Card.Text><strong>Biography:</strong> {pet.biography}</Card.Text>
-            </Card.Body>
-            <ListGroup className="list-group-flush">
-              <ListGroupItem>
-                <strong>Type:</strong> {pet.type}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Dietary Restriction:</strong> {pet.dietary}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Breed:</strong> {pet.breed}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Height:</strong> {pet.height}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Wheight:</strong> {pet.weight}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Hypoallergenic?:</strong> {pet.hypo}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Color:</strong> {pet.color}
-              </ListGroupItem>
-              <ListGroupItem>
-                <strong>Adoption Status:</strong> {pet.adoptionStatus}
-              </ListGroupItem>
-            </ListGroup>
-            <Card.Body>
-              <Card.Link href="#">Card Link</Card.Link>
-              <Card.Link href="#">Another Link</Card.Link>
-            </Card.Body>
-          </Card>
-        </ListGroup>
+        <div className="petscontainer">
+          <div>
+            <div className="main-cont">
+              <div className="card">
+                <img src={currentPet.image} />
+                <div className="descp">
+                  <h4>
+                    <strong>Name:</strong> {currentPet.namePets}
+                  </h4>
+                  <h4>
+                    <strong>Type:</strong> {currentPet.type}
+                  </h4>
+                  <h4>
+                    <strong>Height:</strong> {currentPet.height}
+                  </h4>
+                  <h4>
+                    <strong>Weight:</strong> {currentPet.weight}
+                  </h4>
+                  <h4>
+                    <strong>Dietary:</strong> {currentPet.dietary}
+                  </h4>
+                  <h4>
+                    <strong>Breed:</strong> {currentPet.breed}
+                  </h4>
+                  <h4>
+                    <strong>Hypoallergenic:</strong> {currentPet.hypo}
+                  </h4>
+                  <h4>
+                    <strong>Color:</strong> {currentPet.color}
+                  </h4>
+                  <h4>
+                    <strong>Biography:</strong> {currentPet.biography}
+                  </h4>
+                  <h4>
+                    <strong>Status:</strong> {currentPet.adoptionStatus}
+                  </h4>
+                </div>
+                <div class="social">
+                  {isAuth ? (
+                    <ButtonsForStatus
+                      setStatus={setStatus}
+                      isAuth={isAuth}
+                      currentUser={currentUser}
+                      pet={currentPet}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-export default GetPets;
+export default Showpet;

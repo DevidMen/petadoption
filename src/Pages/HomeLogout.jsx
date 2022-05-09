@@ -1,7 +1,7 @@
 import ModalSignin from "../Components/ModalSignin";
 import ModalSignup from "../Components/ModalSignup";
 import { useState } from "react";
-
+import React from "react";
 function Home({ setcurrentUser, setisAuth, isAuth, setisAdmin }) {
   const [modalShow, setModalShow] = useState(false);
   const [modalopen, setmodalopen] = useState(false);

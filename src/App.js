@@ -1,4 +1,4 @@
-import Home from "./Pages/Home";
+import Home from "./Pages/HomeLogout";
 import Search from './Pages/Search'
 import NavbarGeneral from "./Components/Navbar";
 import React from "react";
@@ -79,6 +79,8 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
                 <MyPetsPage
                   currentUser={currentUser}
                   isAuth = {isAuth}
+                  setPet={setPet}
+                  pet={pet}
                 />
               }
             />
@@ -141,6 +143,22 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
               fosteredIt = {fosteredIt}
               returnAgency = {returnAgency}
               pet={pet} setPet={setPet}
+            />
+          }
+        />
+          <Route
+          path="/showpet"
+          element={
+            <Showpet
+              setisAuth={setisAuth}
+              isAuth={isAuth}
+              currentUser={currentUser}
+              saveIt = {saveIt}
+              adoptIt = {adoptIt}
+              fosteredIt = {fosteredIt}
+              returnAgency = {returnAgency}
+              pet={pet} 
+              setPet={setPet}
             />
           }
         />
