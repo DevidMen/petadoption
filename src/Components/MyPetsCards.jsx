@@ -3,17 +3,10 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 export default function MyPetsCards({
-  setStatus,
-  status,
   pet,
-  currentUser,
-  isAuth,
-  saved,
   setPet,
-  setAllPets,
-  allPets,
 }) {
-  const [email] = useState(currentUser.email);
+
   const navigate = useNavigate();
   function showMore(pet) {
     setPet(pet);
@@ -35,20 +28,7 @@ export default function MyPetsCards({
               </h4>
             </div>
             <div className="social">
-              <Button
-                onClick={() => showMore(pet)}
-                variant="primary"
-                size="sm"
-                pet={pet}
-                setPet={setPet}
-                setAllPets={setAllPets}
-                allPets={allPets}
-                currentUser={currentUser}
-                isAuth={isAuth}
-                setStatus={setStatus}
-                status={status}
-                saved={saved}
-              >
+              <Button onClick={() => showMore(pet)} variant="primary" size="sm">
                 Show more
               </Button>
             </div>

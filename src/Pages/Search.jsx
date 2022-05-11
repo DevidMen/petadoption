@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Form,
   Button,
@@ -8,7 +8,7 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import React from "react";
-import ButtonsForStatus from "../Components/ButtonsForStatus";
+
 
 
 function Search({ isAuth, currentUser, setPet }) {
@@ -140,10 +140,10 @@ function Search({ isAuth, currentUser, setPet }) {
           allPets.map((pet, index) => {
             return (
               <div key={index}>
-                <div class="main-cont">
-                  <div class="card">
+                <div className="main-cont">
+                  <div className="card">
                     <img src={pet.image} />
-                    <div class="descp">
+                    <div className="descp">
                       <h4>
                         <strong>Name:</strong> {pet.namePets}
                       </h4>
@@ -160,14 +160,11 @@ function Search({ isAuth, currentUser, setPet }) {
                         <strong>Status:</strong> {pet.adoptionStatus}
                       </h4>
                     </div>
-                    <div class="social">
+                    <div className="social">
                       <Button
                         onClick={() => showMore(pet)}
                         variant="primary"
                         size="sm"
-                        pet={pet}
-                        isAuth={isAuth}
-                        currentUser={currentUser}
                       >Show More</Button>
                     </div>
                   </div>

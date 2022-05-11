@@ -69,7 +69,7 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
               element={
                 <HomeLogIn
                   currentUser={currentUser}
-                  setcurrentUser={setcurrentUser}
+        
                 />
               }
             />
@@ -80,7 +80,6 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
                   currentUser={currentUser}
                   isAuth = {isAuth}
                   setPet={setPet}
-                  pet={pet}
                 />
               }
             />

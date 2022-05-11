@@ -79,7 +79,7 @@ function GetPets({ currentUser, setEditPet, setPet }) {
                             <strong>Status:</strong> {pet.adoptionStatus}
                           </h4>
                         </div>
-                        <div class="social">
+                        <div className="social">
                           <Button
                           onClick={()=>showMore(pet)}
                           variant="primary"

@@ -54,15 +54,15 @@ function UserDetails({ currentUser, userComplete, index }) {
           petsOfUser.map((pet, index) => {
             return (
               <div>
-                <div class="main-cont">
-                  <div class="card">
+                <div className="main-cont">
+                  <div className="card">
                     <img src={pet.image} />
-                    <div class="descp">
+                    <div className="descp">
                     <h4><strong>Name:</strong> {pet.namePets}</h4>
                       <h4><strong>Type:</strong> {pet.type}</h4>
                       <h4><strong>Height:</strong> {pet.height}</h4>
                       <h4><strong>Weight:</strong> {pet.weight}</h4>
-                      <h4><strong>Dietary:</strong> {pet.dietary}</h4>
+                      <h4><strong>Dietary:</strong>{pet.dietary}</h4>
                       <h4><strong>Breed:</strong> {pet.breed}</h4>
                       <h4><strong>Hypoallergenic:</strong> {pet.hypo}</h4>
                       <h4><strong>Color:</strong> {pet.color}</h4>

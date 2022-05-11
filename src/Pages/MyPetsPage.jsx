@@ -4,7 +4,7 @@ import MyPetsCards from "../Components/MyPetsCards";
 import axios from "axios";
 
 
-function MyPetsPage({ isAuth, currentUser, setPet ,pet}) {
+function MyPetsPage({ isAuth, currentUser, setPet}) {
   const [savedPets, setSavedPets] = useState([]);
   const [status , setStatus] = useState([])
   const [ownerPets, setOwnerPets] = useState([]);

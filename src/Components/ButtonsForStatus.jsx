@@ -115,7 +115,7 @@ export default function ButtonsForStatus({ pet, currentUser, setStatus }) {
           ""
         )}
 
-        {pet.adoptionStatus === "Fostered" &&
+        {pet.adoptionStatus === "Fostered" && 
         currentUser.email === pet.owner ? (
           <>
             <Button variant="danger" size="sm" onClick={() => returnAgency(pet)}>Cancell foster</Button>
