@@ -35,7 +35,7 @@ function ProfileSettings({ currentUser, setcurrentUser }) {
 
       setloginemail(response.data.email);
       alert(response.data.message);
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       if (err.response.data[0]) {
         alert(

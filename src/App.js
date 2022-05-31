@@ -1,8 +1,7 @@
-import Home from "./Pages/HomeLogout";
+import Home from "./Pages/Home";
 import Search from './Pages/Search'
 import NavbarGeneral from "./Components/Navbar";
 import React from "react";
-import HomeLogIn from "./Pages/HomeLogIn";
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import ProfileSettings from "./Pages/ProfileSettings";
@@ -11,7 +10,7 @@ import Users from "./Pages/Users";
 import AddPets from "./Pages/AddPets";
 import GetPets from "./Pages/GetPets";
 import UpdatePet from "./Pages/UpdatePet";
-import Showpet from './Pages/Showpet'
+import Showpet from "./Components/Showpet";
 import MyPetsPage from "./Pages/MyPetsPage";
 import UserDetails from './Pages/UserDetails'
 import "./App.css";
@@ -43,8 +42,7 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
 
       <Routes>
 
-        {!isAuth ? (
-          <>
+
           <Route
             path="/"
             element={
@@ -54,25 +52,15 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
                 setcurrentUser={setcurrentUser}
                 admin={admin}
                 setisAdmin={setisAdmin}
+                currentUser={currentUser}
               />
             }
           />
 
-        </>  
-        ) 
+
         
-        : (
+ 
           <>
-                    
-            <Route
-              path="/home"
-              element={
-                <HomeLogIn
-                  currentUser={currentUser}
-        
-                />
-              }
-            />
             <Route
               path="/mypets"
               element={
@@ -127,7 +115,7 @@ function App({returnAgency, saveIt ,adoptIt , fosteredIt}) {
               ""
             )}
           </>
-        )}
+   
           <Route
           path="/search"
           element={

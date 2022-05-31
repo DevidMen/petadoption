@@ -18,7 +18,7 @@ function UpdatePassword({ currentUser }) {
       );
 
       alert(response.data.message);
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       if (err.response.data[0]) {
         alert(

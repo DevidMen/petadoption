@@ -35,7 +35,7 @@ function ModalSignup({ setisAuth, setcurrentUser }) {
       setConfirmpass("");
       setPhone("");
       setisAuth(true);
-      navigate("/home");
+ 
     } catch (err) {
       if (err.response.data[0]) {
         alert(

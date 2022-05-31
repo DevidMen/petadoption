@@ -53,7 +53,7 @@ function UpdatePet({ currentUser, editPet }) {
       setDietary("");
       setAdoptionStatus("");
       setbiography("");
-      navigate("/home");
+      navigate("/");
     } catch (err) {
       if (err.response.data[0]) {
         alert(

@@ -25,7 +25,7 @@ function ModalSignin({ setisAuth, setcurrentUser, setisAdmin }) {
       });
       setcurrentUser({ ...response.data.user[0] });
       setisAuth(true);
-      navigate("/home");
+
       setEmail("");
       setPassward("");
       setisAdmin(response.data.user[0].role === "admin");
@@ -49,7 +49,7 @@ function ModalSignin({ setisAuth, setcurrentUser, setisAdmin }) {
         if (res) {
           setcurrentUser({ ...res.data.user[0] });
           setisAuth({ ...res.data.auth });
-          navigate("/home");
+          navigate("/");
           setisAdmin(res.data.user[0].role === "admin");
         }
       });

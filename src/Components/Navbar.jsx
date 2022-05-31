@@ -28,7 +28,7 @@ export default function NavbarGeneral({  setcurrentUser, setisAuth , isAuth , ad
                 style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link to="/home" as={Link} >
+                <Nav.Link to="/" as={Link} >
                   Home
                 </Nav.Link>
                 <Nav.Link to="/search" as={Link} >
